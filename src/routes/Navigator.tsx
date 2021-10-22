@@ -54,12 +54,6 @@ const Navigator = () => {
   const onRouteChange = (state: NavigationState, theme: DefaultTheme) => {
     previousRouteName = currentRouteName;
     currentRouteName = getActiveRouteName(state) as string;
-
-    if (currentRouteName !== previousRouteName) {
-      maybeLeaveScreenBreadcrumb(currentRouteName);
-      AnalyticsApi.maybeLogVisitedView(currentRouteName);
-      setStatusBar(currentRouteName, theme);
-    }
   };
 
   const Stack = createStackNavigator();
