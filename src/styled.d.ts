@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import 'styled-components/native';
 
 declare module 'styled-components/native' {
@@ -5,6 +6,7 @@ declare module 'styled-components/native' {
     mode: string;
     // type: string;
     colors: AppColors;
+    fonts: AppFonts;
     // fonts: {
     //   size: {
     //     xs: number;
@@ -56,4 +58,30 @@ export interface AppColors {
   black07: string;
   black08: string;
   black09: string;
+}
+export interface AppFonts {
+  Montserrat: MONTSERRAT;
+  Poppins: POPPINS;
+}
+
+interface MONTSERRAT {
+  MontserratBold: string;
+  MontserratExtraBold: string;
+  MontserratExtraLight: string;
+  MontserratLight: string;
+  MontserratMedium: string;
+  MontserratRegular: string;
+  MontserratSemiBold: string;
+  MontserratThin: string;
+}
+
+interface POPPINS {
+  PoppinsBold: string;
+  PoppinsExtraBold: string;
+  PoppinsExtraLight: string;
+  PoppinsLight: string;
+  PoppinsMedium: string;
+  PoppinsRegular: string;
+  PoppinsSemiBold: string;
+  PoppinsThin: string;
 }

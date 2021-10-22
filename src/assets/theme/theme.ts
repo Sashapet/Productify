@@ -1,17 +1,17 @@
 import { DefaultTheme } from 'styled-components/native';
 
-import { COLORS } from './';
+import { COLORS, FONTS } from './';
 
 export const lightTheme: DefaultTheme = {
   mode: 'light',
-  //   fonts: FONTS,
+  fonts: FONTS,
   colors: COLORS,
   //   shadows: SHADOWS,
 };
 
 export const darkTheme: DefaultTheme = {
   mode: 'dark',
-  //   fonts: FONTS,
+  fonts: FONTS,
   colors: COLORS,
   //   shadows: SHADOWS,
 };
