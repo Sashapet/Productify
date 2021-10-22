@@ -11,7 +11,7 @@ import {
   setStatusBar,
 } from '../utils/navigation';
 
-import { DemoView } from '../containers/DemoFlow';
+import { LandingView } from '../containers/LoginFlow';
 import { ROUTES } from './RouteNames';
 
 const disabledAndroidBackScreens: string[] = [
@@ -70,7 +70,7 @@ const Navigator = () => {
       onStateChange={(state: NavigationState) => onRouteChange(state, theme)}
     >
       <Stack.Navigator headerMode="none">
-        <Stack.Screen name="demoScreen" component={DemoView} />
+        <Stack.Screen name="LandingScreen" component={LandingView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
