@@ -62,6 +62,16 @@ export interface AppColors {
 export interface AppFonts {
   Montserrat: MONTSERRAT;
   Poppins: POPPINS;
+  size: {
+    xs: number;
+    s: number;
+    m: number;
+    l: number;
+    xl: number;
+    xxl: number;
+    xxxl: number;
+    x64: number;
+  };
 }
 
 interface MONTSERRAT {

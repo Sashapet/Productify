@@ -23,4 +23,14 @@ const POPPINS = {
 export const FONTS = {
   Montserrat: MONTSERRAT,
   Poppins: POPPINS,
+  size: {
+    xs: 10,
+    s: 16,
+    m: 22,
+    l: 28,
+    xl: 35,
+    xxl: 40,
+    xxxl: 45,
+    x64: 64,
+  },
 };
