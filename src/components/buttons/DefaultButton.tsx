@@ -3,31 +3,30 @@ import styled from 'styled-components/native';
 
 interface DefaultButtonProps {
   onPress: (event: unknown) => void;
-  title: string;
 }
 
 export const DefaultButton: React.FC<DefaultButtonProps> = ({
   onPress,
-  title,
+  children,
 }) => {
   return (
     <TouchableWrapper onPress={onPress}>
-      <ButtonTitle>{title}</ButtonTitle>
+      <ButtonTitle>{children}</ButtonTitle>
     </TouchableWrapper>
   );
 };
 
 const ButtonTitle = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.fonts.size.s}px;
+  font-family: ${({ theme }) => theme.fonts.Montserrat.MontserratBold};
   text-align: center;
-  width: 100%;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 const TouchableWrapper = styled.TouchableOpacity`
   border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.1);
-  margin-top: 10px;
-  padding-vertical: 10px;
-  padding-horizontal: 15px;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  flex: 1;
+  /* padding-vertical: 27px; */
 `;
