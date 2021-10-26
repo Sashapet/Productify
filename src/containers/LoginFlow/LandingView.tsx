@@ -1,10 +1,9 @@
-import React from 'react';
-
 import styled from 'styled-components/native';
 //dimension width
 import { dWidth } from '@utils/helpers/dimensions';
 // import { useTranslation } from 'react-i18next';
 import { DefaultButton } from '@components/index';
+import React from 'react';
 // import { locale } from '../../utils/locale';
 //Resizible image size
 //Viewbox width and height
@@ -16,28 +15,26 @@ const aspectRatio = vHeight / vWidth;
 //height dependant on aspectRatio
 const height = width * aspectRatio;
 
-export const LandingView: React.FC = () => {
+export const LandingView: React.FC = () => (
   // const { t } = useTranslation();
 
-  return (
-    <HomeContainer>
-      <LogoImg source={require('@assets/images/logo.png')} />
-      <LogoTextContainer>
-        <LogoText1>Producti</LogoText1>
-        <LogoText2>Fy</LogoText2>
-      </LogoTextContainer>
-      <Paragraph>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout.
-      </Paragraph>
-      <ButtonContainer>
-        <DefaultButton onPress={() => console.tron.log('op')}>
-          Get Started
-        </DefaultButton>
-      </ButtonContainer>
-    </HomeContainer>
-  );
-};
+  <HomeContainer>
+    <LogoImg source={require('@assets/images/logo.png')} />
+    <LogoTextContainer>
+      <LogoText1>Producti</LogoText1>
+      <LogoText2>Fy</LogoText2>
+    </LogoTextContainer>
+    <Paragraph>
+      It is a long established fact that a reader will be distracted by the
+      readable content of a page when looking at its layout.
+    </Paragraph>
+    <ButtonContainer>
+      <DefaultButton onPress={() => console.tron.log('op')}>
+        Get Started
+      </DefaultButton>
+    </ButtonContainer>
+  </HomeContainer>
+);
 
 const HomeContainer = styled.View`
   flex: 1;

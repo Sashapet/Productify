@@ -8,13 +8,11 @@ interface DefaultButtonProps {
 export const DefaultButton: React.FC<DefaultButtonProps> = ({
   onPress,
   children,
-}) => {
-  return (
-    <TouchableWrapper onPress={onPress}>
-      <ButtonTitle>{children}</ButtonTitle>
-    </TouchableWrapper>
-  );
-};
+}) => (
+  <TouchableWrapper onPress={onPress}>
+    <ButtonTitle>{children}</ButtonTitle>
+  </TouchableWrapper>
+);
 
 const ButtonTitle = styled.Text`
   font-size: ${({ theme }) => theme.fonts.size.s}px;

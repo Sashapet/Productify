@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import 'styled-components/native';
 
 declare module 'styled-components/native' {

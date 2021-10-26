@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components/native';
 
-import { COLORS, FONTS } from './';
+import { COLORS, FONTS } from '.';
 
 export const lightTheme: DefaultTheme = {
   mode: 'light',
