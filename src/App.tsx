@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Provider } from 'react-redux';
-import { store } from './state/store';
 
+import { store } from './state/store';
 import Navigator from './routes/Navigator';
 
 const App = memo(() => (

@@ -1,32 +1,45 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { scale } from '@utils/helpers/dimensions';
 
 interface DefaultButtonProps {
   onPress: (event: unknown) => void;
 }
 
-export const DefaultButton: React.FC<DefaultButtonProps> = ({
+export const PrimaryButton: React.FC<DefaultButtonProps> = ({
   onPress,
   children,
-}) => {
-  return (
-    <TouchableWrapper onPress={onPress}>
-      <ButtonTitle>{children}</ButtonTitle>
-    </TouchableWrapper>
-  );
-};
+}) => (
+  <PrimaryTouchableWrapper onPress={onPress}>
+    <ButtonTitle>{children}</ButtonTitle>
+  </PrimaryTouchableWrapper>
+);
+
+export const SecondaryButton: React.FC<DefaultButtonProps> = ({
+  onPress,
+  children,
+}) => (
+  <SecondaryTouchableWrapper onPress={onPress}>
+    <ButtonTitle>{children}</ButtonTitle>
+  </SecondaryTouchableWrapper>
+);
 
 const ButtonTitle = styled.Text`
-  font-size: ${({ theme }) => theme.fonts.size.s}px;
+  font-size: ${({ theme }) => scale(theme.fonts.size.m)}px;
   font-family: ${({ theme }) => theme.fonts.Montserrat.MontserratBold};
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
 `;
 
-const TouchableWrapper = styled.TouchableOpacity`
+const PrimaryTouchableWrapper = styled.TouchableOpacity`
+  border-radius: 6px;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.primary};
+  flex: 1;
+`;
+const SecondaryTouchableWrapper = styled.TouchableOpacity`
   border-radius: 6px;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.secondary};
   flex: 1;
-  /* padding-vertical: 27px; */
 `;
