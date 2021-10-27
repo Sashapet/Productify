@@ -26,7 +26,7 @@ export const FONTS = {
   size: {
     xs: 10,
     s: 16,
-    m: 22,
+    m: 20,
     l: 28,
     xl: 35,
     xxl: 40,
