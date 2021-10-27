@@ -47,7 +47,6 @@ export const RegisterForm: React.FC = () => {
               />
               <Label>Confirm Password</Label>
             </BoxShadow>
-            <GreenText>Forgot Password?</GreenText>
           </MiddleSection>
           <ButtonContainer>
             <PrimaryButton onPress={submit}>Register</PrimaryButton>

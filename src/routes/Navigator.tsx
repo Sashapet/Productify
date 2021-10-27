@@ -7,7 +7,12 @@ import { ThemeProvider } from 'styled-components/native';
 import { COLORS } from '@assets/theme';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 
-import { LandingView, LoginView, RegisterView } from '../containers/LoginFlow';
+import {
+  ForgotPasswordView,
+  LandingView,
+  LoginView,
+  RegisterView,
+} from '../containers/LoginFlow';
 
 const Navigator = () => {
   const Stack = createStackNavigator();
@@ -29,6 +34,10 @@ const Navigator = () => {
               <Stack.Screen name="LandingScreen" component={LandingView} />
               <Stack.Screen name="LoginScreen" component={LoginView} />
               <Stack.Screen name="RegisterScreen" component={RegisterView} />
+              <Stack.Screen
+                name="ForgotPasswordScreen"
+                component={ForgotPasswordView}
+              />
             </Stack.Navigator>
           </NavigationContainer>
         </View>
