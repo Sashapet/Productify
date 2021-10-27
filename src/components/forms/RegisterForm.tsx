@@ -7,17 +7,17 @@ import { TouchableWithoutFeedback } from 'react-native';
 
 import { PrimaryButton } from '..';
 
-export const LoginForm: React.FC = () => {
+export const RegisterForm: React.FC = () => {
   const submit = useCallback(() => {
     console.tron.log('sth');
   }, []);
   const { navigate } = useNavigation();
-  const navigateToRegister = useCallback(() => {
-    navigate('RegisterScreen');
+  const navigateToLogin = useCallback(() => {
+    navigate('LoginScreen');
   }, []);
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ email: '', password: '', confirmPassword: '' }}
       onSubmit={values => console.tron.log(values)}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -39,15 +39,23 @@ export const LoginForm: React.FC = () => {
               />
               <Label>Password</Label>
             </BoxShadow>
+            <BoxShadow>
+              <Input
+                onChangeText={handleChange('confirmPassword')}
+                onBlur={handleBlur('confirmPassword')}
+                value={values.confirmPassword}
+              />
+              <Label>Confirm Password</Label>
+            </BoxShadow>
             <GreenText>Forgot Password?</GreenText>
           </MiddleSection>
           <ButtonContainer>
-            <PrimaryButton onPress={submit}>Login</PrimaryButton>
+            <PrimaryButton onPress={submit}>Register</PrimaryButton>
           </ButtonContainer>
-          <TouchableWithoutFeedback onPress={navigateToRegister}>
+          <TouchableWithoutFeedback onPress={navigateToLogin}>
             <FlexContainer>
-              <QuestionText>Don&apos;t have an account?</QuestionText>
-              <GreenText>Register</GreenText>
+              <QuestionText>Already have an account?</QuestionText>
+              <GreenText>Login</GreenText>
             </FlexContainer>
           </TouchableWithoutFeedback>
         </>
@@ -56,7 +64,7 @@ export const LoginForm: React.FC = () => {
   );
 };
 const MiddleSection = styled.View`
-  padding-vertical: ${moderateScale(72, 2)}px;
+  padding-vertical: ${moderateScale(52, 2)}px;
 `;
 const BoxShadow = styled.View`
   border-radius: 10px;

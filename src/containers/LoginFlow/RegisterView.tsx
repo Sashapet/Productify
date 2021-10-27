@@ -1,23 +1,25 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { LoginForm } from '@components/forms/';
+import { RegisterForm } from '@components/forms';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
 
-export const LoginView: React.FC = () => (
-  <LoginContainer>
+export const RegisterView: React.FC = () => (
+  <RegisterContainer>
     <UpperSection>
-      <Header>Login</Header>
-      <Description>Login to continue using our app.</Description>
-      <LoginForm />
+      <Header>Register</Header>
+      <Description>
+        Register with email and password to continue using out app.
+      </Description>
+      <RegisterForm />
     </UpperSection>
     <LogoTextContainer>
       <LogoText1>Producti</LogoText1>
       <LogoText2>Fy</LogoText2>
     </LogoTextContainer>
-  </LoginContainer>
+  </RegisterContainer>
 );
 
-const LoginContainer = styled.View`
+const RegisterContainer = styled.View`
   flex: 1;
   width: 85%;
   margin: ${moderateScale(30, 2)}px auto;
