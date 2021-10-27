@@ -2,25 +2,16 @@ import React, { useCallback } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableWithoutFeedback } from 'react-native';
 
 import { PrimaryButton } from '..';
 
-export const LoginForm: React.FC = () => {
+export const ForgotPasswordForm: React.FC = () => {
   const submit = useCallback(() => {
     console.tron.log('sth');
   }, []);
-  const { navigate } = useNavigation();
-  const navigateToRegister = useCallback(() => {
-    navigate('RegisterScreen');
-  }, []);
-  const navigateToForgot = useCallback(() => {
-    navigate('ForgotPasswordScreen');
-  }, []);
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ email: '' }}
       onSubmit={values => console.tron.log(values)}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -34,25 +25,10 @@ export const LoginForm: React.FC = () => {
               />
               <Label>Email</Label>
             </BoxShadow>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-              />
-              <Label>Password</Label>
-            </BoxShadow>
-            <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
           </MiddleSection>
           <ButtonContainer>
-            <PrimaryButton onPress={submit}>Login</PrimaryButton>
+            <PrimaryButton onPress={submit}>Reset</PrimaryButton>
           </ButtonContainer>
-          <TouchableWithoutFeedback onPress={navigateToRegister}>
-            <FlexContainer>
-              <QuestionText>Don&apos;t have an account?</QuestionText>
-              <GreenText>Register</GreenText>
-            </FlexContainer>
-          </TouchableWithoutFeedback>
         </>
       )}
     </Formik>
@@ -82,24 +58,8 @@ const Label = styled.Text`
   padding-left: ${scale(10)}px;
   z-index: -10;
 `;
-const GreenText = styled.Text`
-  color: ${({ theme }) => theme.colors.primary};
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsBold};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-`;
 
 const ButtonContainer = styled.View`
   height: ${scale(71)}px;
   margin-bottom: ${scale(10)}px;
-`;
-
-const QuestionText = styled.Text`
-  color: ${({ theme }) => theme.colors.black02};
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  padding-right: 2px;
-`;
-const FlexContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
 `;
