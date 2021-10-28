@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { LoginForm } from '@components/forms/';
-import { moderateScale, scale } from '@utils/helpers/dimensions';
+import { LoginForm } from '@components/.';
+import { moderateScale, scale } from '@utils/helpers/.';
 
 export const LoginView: React.FC = () => (
   <LoginContainer>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { RegisterForm } from '@components/forms';
-import { moderateScale, scale } from '@utils/helpers/dimensions';
+import { RegisterForm } from '@components/.';
+import { moderateScale, scale } from '@utils/helpers/.';
 
 export const RegisterView: React.FC = () => (
   <RegisterContainer>

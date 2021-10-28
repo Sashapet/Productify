@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/native';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
-import { SecondaryButton } from '@components/index';
+import { SecondaryButton } from '@components/.';
 import { useNavigation } from '@react-navigation/native';
 
 export const LandingView: React.FC = () => {
