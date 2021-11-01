@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { PrimaryButton } from '..';
 
@@ -15,6 +16,7 @@ export const RegisterForm: React.FC = () => {
   const navigateToLogin = useCallback(() => {
     navigate('LoginScreen');
   }, []);
+
   return (
     <Formik
       initialValues={{ email: '', password: '', confirmPassword: '' }}
@@ -22,41 +24,48 @@ export const RegisterForm: React.FC = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
-          <MiddleSection>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
-              />
-              <Label>Email</Label>
-            </BoxShadow>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-              />
-              <Label>Password</Label>
-            </BoxShadow>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('confirmPassword')}
-                onBlur={handleBlur('confirmPassword')}
-                value={values.confirmPassword}
-              />
-              <Label>Confirm Password</Label>
-            </BoxShadow>
-          </MiddleSection>
-          <ButtonContainer>
-            <PrimaryButton onPress={submit}>Register</PrimaryButton>
-          </ButtonContainer>
-          <TouchableWithoutFeedback onPress={navigateToLogin}>
-            <FlexContainer>
-              <QuestionText>Already have an account?</QuestionText>
-              <GreenText>Login</GreenText>
-            </FlexContainer>
-          </TouchableWithoutFeedback>
+          <KeyboardAwareScrollView
+            extraScrollHeight={15}
+            enableOnAndroid={true}
+            style={{ marginHorizontal: -20 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+          >
+            <MiddleSection>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                />
+                <Label>Email</Label>
+              </BoxShadow>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                />
+                <Label>Password</Label>
+              </BoxShadow>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
+                  value={values.confirmPassword}
+                />
+                <Label>Confirm Password</Label>
+              </BoxShadow>
+            </MiddleSection>
+            <ButtonContainer>
+              <PrimaryButton onPress={submit}>Register</PrimaryButton>
+            </ButtonContainer>
+            <TouchableWithoutFeedback onPress={navigateToLogin}>
+              <FlexContainer>
+                <QuestionText>Already have an account?</QuestionText>
+                <GreenText>Login</GreenText>
+              </FlexContainer>
+            </TouchableWithoutFeedback>
+          </KeyboardAwareScrollView>
         </>
       )}
     </Formik>
@@ -67,6 +76,7 @@ const MiddleSection = styled.View`
 `;
 const BoxShadow = styled.View`
   border-radius: 10px;
+  padding: -20px;
   elevation: 7;
   background-color: ${({ theme }) => theme.colors.white};
   justify-content: center;

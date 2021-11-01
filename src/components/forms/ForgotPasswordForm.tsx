@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
-import { moderateScale, scale } from '@utils/helpers/dimensions';
+import { moderateScale, scale, verticalScale } from '@utils/helpers/dimensions';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { PrimaryButton } from '..';
 
@@ -16,19 +17,26 @@ export const ForgotPasswordForm: React.FC = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
-          <MiddleSection>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
-              />
-              <Label>Email</Label>
-            </BoxShadow>
-          </MiddleSection>
-          <ButtonContainer>
-            <PrimaryButton onPress={submit}>Reset</PrimaryButton>
-          </ButtonContainer>
+          <KeyboardAwareScrollView
+            extraScrollHeight={15}
+            enableOnAndroid={true}
+            style={{ marginHorizontal: -20 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+          >
+            <MiddleSection>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                />
+                <Label>Email</Label>
+              </BoxShadow>
+            </MiddleSection>
+            <ButtonContainer>
+              <PrimaryButton onPress={submit}>Reset</PrimaryButton>
+            </ButtonContainer>
+          </KeyboardAwareScrollView>
         </>
       )}
     </Formik>
@@ -61,5 +69,5 @@ const Label = styled.Text`
 
 const ButtonContainer = styled.View`
   height: ${scale(71)}px;
-  margin-bottom: ${scale(10)}px;
+  margin-bottom: ${verticalScale(150)}px;
 `;

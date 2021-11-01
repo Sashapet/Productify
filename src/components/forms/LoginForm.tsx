@@ -4,6 +4,7 @@ import styled from 'styled-components/native';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { PrimaryButton } from '..';
 
@@ -25,34 +26,42 @@ export const LoginForm: React.FC = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
-          <MiddleSection>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
-              />
-              <Label>Email</Label>
-            </BoxShadow>
-            <BoxShadow>
-              <Input
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-              />
-              <Label>Password</Label>
-            </BoxShadow>
-            <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
-          </MiddleSection>
-          <ButtonContainer>
-            <PrimaryButton onPress={submit}>Login</PrimaryButton>
-          </ButtonContainer>
-          <TouchableWithoutFeedback onPress={navigateToRegister}>
-            <FlexContainer>
-              <QuestionText>Don&apos;t have an account?</QuestionText>
-              <GreenText>Register</GreenText>
-            </FlexContainer>
-          </TouchableWithoutFeedback>
+          <KeyboardAwareScrollView
+            extraScrollHeight={15}
+            enableOnAndroid={true}
+            style={{ marginHorizontal: -20 }}
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+          >
+            <MiddleSection>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                />
+                <Label>Email</Label>
+              </BoxShadow>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                />
+                <Label>Password</Label>
+              </BoxShadow>
+              <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
+            </MiddleSection>
+
+            <ButtonContainer>
+              <PrimaryButton onPress={submit}>Login</PrimaryButton>
+            </ButtonContainer>
+            <TouchableWithoutFeedback onPress={navigateToRegister}>
+              <FlexContainer>
+                <QuestionText>Don&apos;t have an account?</QuestionText>
+                <GreenText>Register</GreenText>
+              </FlexContainer>
+            </TouchableWithoutFeedback>
+          </KeyboardAwareScrollView>
         </>
       )}
     </Formik>
