@@ -22,7 +22,7 @@ export const RegisterForm: React.FC = () => {
       initialValues={{ email: '', password: '', confirmPassword: '' }}
       onSubmit={values => console.tron.log(values)}
     >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
+      {({ handleChange, handleBlur, values }) => (
         <>
           <KeyboardAwareScrollView
             extraScrollHeight={15}
@@ -36,24 +36,30 @@ export const RegisterForm: React.FC = () => {
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
+                  placeholder="Email"
                 />
-                <Label>Email</Label>
+                {/* Leaving for later animation */}
+                {/* <Label>Email</Label> */}
               </BoxShadow>
               <BoxShadow>
                 <Input
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
+                  placeholder="Password"
                 />
-                <Label>Password</Label>
+                {/* Leaving for later animation */}
+                {/* <Label>Password</Label> */}
               </BoxShadow>
               <BoxShadow>
                 <Input
                   onChangeText={handleChange('confirmPassword')}
                   onBlur={handleBlur('confirmPassword')}
                   value={values.confirmPassword}
+                  placeholder="Confirm Passsword"
                 />
-                <Label>Confirm Password</Label>
+                {/* Leaving for later animation */}
+                {/* <Label>Confirm Password</Label> */}
               </BoxShadow>
             </MiddleSection>
             <ButtonContainer>
@@ -88,14 +94,14 @@ const Input = styled.TextInput`
   height: ${scale(71)}px;
   padding-left: ${scale(10)}px;
 `;
-const Label = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  position: absolute;
-  padding-left: ${scale(10)}px;
-  z-index: -10;
-`;
+// const Label = styled.Text`
+//   font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
+//   color: ${({ theme }) => theme.colors.primary};
+//   font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
+//   position: absolute;
+//   padding-left: ${scale(10)}px;
+//   z-index: -10;
+// `;
 const GreenText = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsBold};
