@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { scale } from '@utils/helpers/dimensions';
-import { GestureResponderEvent } from 'react-native';
 
 interface DefaultButtonProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress: (event: unknown) => void;
 }
 
 export const PrimaryButton: React.FC<DefaultButtonProps> = ({

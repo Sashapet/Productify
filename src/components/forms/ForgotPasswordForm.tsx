@@ -1,49 +1,46 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
 import { moderateScale, scale, verticalScale } from '@utils/helpers/dimensions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { validations } from '@utils/validations';
 
 import { PrimaryButton } from '..';
 
-export const ForgotPasswordForm: React.FC = () => {
-  const submit = useCallback(() => {
-    console.tron.log('sth');
-  }, []);
-  return (
-    <Formik
-      initialValues={{ email: '' }}
-      onSubmit={values => console.tron.log(values)}
-    >
-      {({ handleChange, handleBlur, values }) => (
-        <>
-          <KeyboardAwareScrollView
-            extraScrollHeight={15}
-            enableOnAndroid={true}
-            style={{ marginHorizontal: -20 }}
-            contentContainerStyle={{ paddingHorizontal: 20 }}
-          >
-            <MiddleSection>
-              <BoxShadow>
-                <Input
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  value={values.email}
-                  placeholder="Email"
-                />
-                {/* Leaving for later animation */}
-                {/* <Label>Email</Label> */}
-              </BoxShadow>
-            </MiddleSection>
-            <ButtonContainer>
-              <PrimaryButton onPress={submit}>Reset</PrimaryButton>
-            </ButtonContainer>
-          </KeyboardAwareScrollView>
-        </>
-      )}
-    </Formik>
-  );
-};
+export const ForgotPasswordForm: React.FC = () => (
+  <Formik
+    initialValues={{ email: '' }}
+    onSubmit={values => console.tron.log(values)}
+    validationSchema={validations.forgot}
+  >
+    {({ handleChange, handleBlur, handleSubmit, values }) => (
+      <>
+        <KeyboardAwareScrollView
+          extraScrollHeight={15}
+          enableOnAndroid={true}
+          style={{ marginHorizontal: -20 }}
+          contentContainerStyle={{ paddingHorizontal: 20 }}
+        >
+          <MiddleSection>
+            <BoxShadow>
+              <Input
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                placeholder="Email"
+              />
+              {/* Leaving for later animation */}
+              {/* <Label>Email</Label> */}
+            </BoxShadow>
+          </MiddleSection>
+          <ButtonContainer>
+            <PrimaryButton onPress={handleSubmit}>Reset</PrimaryButton>
+          </ButtonContainer>
+        </KeyboardAwareScrollView>
+      </>
+    )}
+  </Formik>
+);
 const MiddleSection = styled.View`
   padding-vertical: ${moderateScale(72, 2)}px;
 `;

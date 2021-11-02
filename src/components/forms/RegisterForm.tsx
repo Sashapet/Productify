@@ -7,6 +7,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EyeIcon from 'react-native-vector-icons/Entypo';
 import { COLORS, FONTS } from '@assets/theme';
+import { validations } from '@utils/validations';
 
 import { PrimaryButton } from '..';
 
@@ -15,9 +16,6 @@ export const RegisterForm: React.FC = () => {
 
   const [confirmEye, setConfirmEye] = useState(false);
 
-  const submit = useCallback(() => {
-    console.tron.log('sth');
-  }, []);
   const { navigate } = useNavigation();
   const navigateToLogin = useCallback(() => {
     navigate('LoginScreen');
@@ -33,8 +31,9 @@ export const RegisterForm: React.FC = () => {
     <Formik
       initialValues={{ email: '', password: '', confirmPassword: '' }}
       onSubmit={values => console.tron.log(values)}
+      validationSchema={validations.register}
     >
-      {({ handleChange, handleBlur, values }) => (
+      {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
           <KeyboardAwareScrollView
             extraScrollHeight={15}
@@ -92,7 +91,7 @@ export const RegisterForm: React.FC = () => {
               </BoxShadow>
             </MiddleSection>
             <ButtonContainer>
-              <PrimaryButton onPress={submit}>Register</PrimaryButton>
+              <PrimaryButton onPress={handleSubmit}>Register</PrimaryButton>
             </ButtonContainer>
             <TouchableWithoutFeedback onPress={navigateToLogin}>
               <FlexContainer>
