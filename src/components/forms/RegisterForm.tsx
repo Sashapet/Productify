@@ -1,20 +1,32 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import EyeIcon from 'react-native-vector-icons/Entypo';
+import { COLORS, FONTS } from '@assets/theme';
 
 import { PrimaryButton } from '..';
 
 export const RegisterForm: React.FC = () => {
+  const [passwordEye, setPasswordEye] = useState(false);
+
+  const [confirmEye, setConfirmEye] = useState(false);
+
   const submit = useCallback(() => {
     console.tron.log('sth');
   }, []);
   const { navigate } = useNavigation();
   const navigateToLogin = useCallback(() => {
     navigate('LoginScreen');
+  }, []);
+  const switchPasswordEye = useCallback(() => {
+    setPasswordEye(prevState => !prevState);
+  }, []);
+  const switchConfirmEye = useCallback(() => {
+    setConfirmEye(prevState => !prevState);
   }, []);
 
   return (
@@ -29,6 +41,7 @@ export const RegisterForm: React.FC = () => {
             enableOnAndroid={true}
             style={{ marginHorizontal: -20 }}
             contentContainerStyle={{ paddingHorizontal: 20 }}
+            keyboardShouldPersistTaps={'always'}
           >
             <MiddleSection>
               <BoxShadow>
@@ -47,7 +60,15 @@ export const RegisterForm: React.FC = () => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                   placeholder="Password"
+                  secureTextEntry={passwordEye ? false : true}
                 />
+                <EyeContainer onPress={switchPasswordEye}>
+                  <EyeIcon
+                    name={passwordEye ? 'eye' : 'eye-with-line'}
+                    size={scale(FONTS.size.m)}
+                    color={COLORS.primary}
+                  />
+                </EyeContainer>
                 {/* Leaving for later animation */}
                 {/* <Label>Password</Label> */}
               </BoxShadow>
@@ -57,7 +78,15 @@ export const RegisterForm: React.FC = () => {
                   onBlur={handleBlur('confirmPassword')}
                   value={values.confirmPassword}
                   placeholder="Confirm Passsword"
+                  secureTextEntry={confirmEye ? false : true}
                 />
+                <EyeContainer onPress={switchConfirmEye}>
+                  <EyeIcon
+                    name={confirmEye ? 'eye' : 'eye-with-line'}
+                    size={scale(FONTS.size.m)}
+                    color={COLORS.primary}
+                  />
+                </EyeContainer>
                 {/* Leaving for later animation */}
                 {/* <Label>Confirm Password</Label> */}
               </BoxShadow>
@@ -93,6 +122,10 @@ const Input = styled.TextInput`
   font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
   height: ${scale(71)}px;
   padding-left: ${scale(10)}px;
+`;
+const EyeContainer = styled.TouchableOpacity`
+  position: absolute;
+  right: ${scale(10)}px;
 `;
 // const Label = styled.Text`
 //   font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
