@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 import com.android.build.OutputFile
 
 /**
@@ -185,6 +185,10 @@ android {
 }
 
 dependencies {
+    //FIREBAE
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    //FIREBAE
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-webview')
     implementation fileTree(dir: "libs", include: ["*.jar"])
