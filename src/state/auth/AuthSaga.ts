@@ -1,9 +1,9 @@
 import { EventChannel, eventChannel } from 'redux-saga';
-import { call, fork, put, take, takeLatest } from 'redux-saga/effects';
+import { call, fork, put, take } from 'redux-saga/effects';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 // import database from '@react-native-firebase/database';
 
-import { constants } from '../constants';
+// import { constants } from '../constants';
 import { actions } from '../actions';
 
 // const usersChannel = async (uid: string) => {

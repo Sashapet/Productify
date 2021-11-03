@@ -2,7 +2,7 @@ import { AnyAction, CombinedState, combineReducers } from 'redux';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-import { authReducer, AuthReducerState } from './app/AuthReducer';
+import { authReducer, AuthReducerState } from './auth/AuthReducer';
 
 export interface RootState {
   app: AuthReducerState;

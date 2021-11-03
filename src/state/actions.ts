@@ -1,4 +1,4 @@
-import { authActions } from './app/AuthActions';
+import { authActions } from './auth/AuthActions';
 
 export const actions = {
   auth: authActions,
