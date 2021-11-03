@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { LoginForm } from '@components/forms/';
+import { ForgotPasswordForm } from '@components/forms/';
 import { moderateScale, scale } from '@utils/helpers/dimensions';
 
-export const LoginView: React.FC = () => (
+export const ForgotPasswordView: React.FC = () => (
   <LoginContainer>
     <UpperSection>
-      <Header>Login</Header>
-      <Description>Login to continue using our app.</Description>
-      <LoginForm />
+      <Header>Forgot Password?</Header>
+      <Description>
+        Please provide us with your email to get a request to reset your
+        password.
+      </Description>
+      <ForgotPasswordForm />
     </UpperSection>
     <LogoTextContainer>
       <LogoText1>Producti</LogoText1>

@@ -6,28 +6,32 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EyeIcon from 'react-native-vector-icons/Entypo';
-import { COLORS, FONTS } from '@assets/theme/';
+import { COLORS, FONTS } from '@assets/theme';
 
 import { PrimaryButton } from '..';
 
-export const LoginForm: React.FC = () => {
+export const RegisterForm: React.FC = () => {
   const [passwordEye, setPasswordEye] = useState(false);
+
+  const [confirmEye, setConfirmEye] = useState(false);
+
   const submit = useCallback(() => {
     console.tron.log('sth');
   }, []);
   const { navigate } = useNavigation();
-  const navigateToRegister = useCallback(() => {
-    navigate('RegisterScreen');
-  }, []);
-  const navigateToForgot = useCallback(() => {
-    navigate('ForgotPasswordScreen');
+  const navigateToLogin = useCallback(() => {
+    navigate('LoginScreen');
   }, []);
   const switchPasswordEye = useCallback(() => {
     setPasswordEye(prevState => !prevState);
   }, []);
+  const switchConfirmEye = useCallback(() => {
+    setConfirmEye(prevState => !prevState);
+  }, []);
+
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{ email: '', password: '', confirmPassword: '' }}
       onSubmit={values => console.tron.log(values)}
     >
       {({ handleChange, handleBlur, values }) => (
@@ -68,15 +72,32 @@ export const LoginForm: React.FC = () => {
                 {/* Leaving for later animation */}
                 {/* <Label>Password</Label> */}
               </BoxShadow>
-              <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
+              <BoxShadow>
+                <Input
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
+                  value={values.confirmPassword}
+                  placeholder="Confirm Passsword"
+                  secureTextEntry={confirmEye ? false : true}
+                />
+                <EyeContainer onPress={switchConfirmEye}>
+                  <EyeIcon
+                    name={confirmEye ? 'eye' : 'eye-with-line'}
+                    size={scale(FONTS.size.m)}
+                    color={COLORS.primary}
+                  />
+                </EyeContainer>
+                {/* Leaving for later animation */}
+                {/* <Label>Confirm Password</Label> */}
+              </BoxShadow>
             </MiddleSection>
             <ButtonContainer>
-              <PrimaryButton onPress={submit}>Login</PrimaryButton>
+              <PrimaryButton onPress={submit}>Register</PrimaryButton>
             </ButtonContainer>
-            <TouchableWithoutFeedback onPress={navigateToRegister}>
+            <TouchableWithoutFeedback onPress={navigateToLogin}>
               <FlexContainer>
-                <QuestionText>Don&apos;t have an account?</QuestionText>
-                <GreenText>Register</GreenText>
+                <QuestionText>Already have an account?</QuestionText>
+                <GreenText>Login</GreenText>
               </FlexContainer>
             </TouchableWithoutFeedback>
           </KeyboardAwareScrollView>
@@ -86,10 +107,11 @@ export const LoginForm: React.FC = () => {
   );
 };
 const MiddleSection = styled.View`
-  padding-vertical: ${moderateScale(72, 2)}px;
+  padding-vertical: ${moderateScale(52, 2)}px;
 `;
 const BoxShadow = styled.View`
   border-radius: 10px;
+  padding: -20px;
   elevation: 7;
   background-color: ${({ theme }) => theme.colors.white};
   justify-content: center;
@@ -105,8 +127,6 @@ const EyeContainer = styled.TouchableOpacity`
   position: absolute;
   right: ${scale(10)}px;
 `;
-
-/* Leaving for later animation */
 // const Label = styled.Text`
 //   font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
 //   color: ${({ theme }) => theme.colors.primary};
