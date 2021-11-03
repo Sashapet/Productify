@@ -2,11 +2,10 @@ import { AnyAction, CombinedState, combineReducers } from 'redux';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-import { appReducer, AppReducerState } from './app/AppReducer';
-import { constants } from './constants';
+import { authReducer, AuthReducerState } from './app/AuthReducer';
 
 export interface RootState {
-  app: AppReducerState;
+  app: AuthReducerState;
 }
 
 // export interface PersistedAppState extends RootState {
@@ -21,14 +20,17 @@ export interface RootState {
 // };
 
 const combinedReducer = combineReducers<CombinedState<RootState>>({
-  app: appReducer,
+  app: authReducer,
 });
 
-const rootReducer = (state: RootState | undefined, action: AnyAction) => {
-  if (action.type === constants.app.CLEAR_APP_STATE) {
-    return combinedReducer(undefined, action);
-  }
-  return combinedReducer(state, action);
-};
+const rootReducer = (state: RootState | undefined, action: AnyAction) =>
+  combinedReducer(state, action);
+
+// const rootReducer = (state: RootState | undefined, action: AnyAction) => {
+//   if (action.type === constants.app.CLEAR_APP_STATE) {
+//     return combinedReducer(undefined, action);
+//   }
+//   return combinedReducer(state, action);
+// };
 
 export { rootReducer };
