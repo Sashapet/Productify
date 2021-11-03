@@ -3,15 +3,15 @@ import { createReducer } from '@reduxjs/toolkit';
 import { constants } from '../constants';
 
 export const INITIAL_STATE: AuthReducerState = {
-  auth: false,
+  user: false,
 };
 
 export interface AuthReducerState {
-  auth: boolean;
+  user: boolean;
 }
 
 export const authReducer = createReducer(INITIAL_STATE, {
-  // [constants.app.SET_APP_UPDATE_FLAG]: (state, action) => {
-  //   state.needToUpdate = action.needToUpdate;
-  // },
+  [constants.app.AUTH_USER_STATE_CHANGED]: (state, action) => {
+    state.user = action.user;
+  },
 });

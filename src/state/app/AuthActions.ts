@@ -1,7 +1,12 @@
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
+
 import { constants } from '../constants';
 
-// const clearAppState = () => ({
-//   type: constants.app.CLEAR_APP_STATE,
-// });
+const authUserStateChanged = (user: FirebaseAuthTypes.User) => ({
+  type: constants.app.AUTH_USER_STATE_CHANGED,
+  user,
+});
 
-export const authActions = {};
+export const authActions = {
+  authUserStateChanged,
+};

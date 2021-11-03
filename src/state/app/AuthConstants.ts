@@ -1,3 +1,3 @@
 export const authConstants = {
-  HELLO_WORLD: 'auth/HELLO_WORLD',
+  AUTH_USER_STATE_CHANGED: 'app/AUTH_USER_STATE_CHANGED',
 };
