@@ -12,7 +12,12 @@ const register = (payload: SignUpProps) => ({
   payload,
 });
 
+const logOut = () => ({
+  type: constants.auth.LOGOUT,
+});
+
 export const authActions = {
   authUserStateChanged,
   register,
+  logOut,
 };

@@ -28,6 +28,27 @@ function* register(data: { type: string; payload: SignUpProps }) {
   }
 }
 
+function* logOut() {
+  try {
+    yield call(authApi.logOut);
+    yield put(
+      actions.app.setOnSync({
+        type: setOnSyncConstants.logOut,
+        setOnSync: true,
+      }),
+    );
+  } catch (e) {
+    console.tron.log(e.message);
+  } finally {
+    yield put(
+      actions.app.setOnSync({
+        type: setOnSyncConstants.logOut,
+        setOnSync: false,
+      }),
+    );
+  }
+}
+
 const getAuthChannel = async () =>
   eventChannel(emit => {
     const unsubscribe = auth().onAuthStateChanged(user => {
@@ -53,4 +74,5 @@ export function* watchForFirebaseAuth() {
 export default function* authSaga() {
   yield fork(watchForFirebaseAuth);
   yield takeLeading(constants.auth.REGISTER, register);
+  yield takeLeading(constants.auth.LOGOUT, logOut);
 }
