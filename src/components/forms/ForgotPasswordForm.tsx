@@ -1,9 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
-import styled from 'styled-components/native';
-import { moderateScale, scale, verticalScale } from '@utils/helpers/dimensions';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { validations } from '@utils/validations';
+import {
+  BoxShadow,
+  ButtonContainerM,
+  FormContainer,
+  MiddleSectionM,
+} from '@components/wrappers';
+import { TextInput } from '@components/inputs';
 
 import { PrimaryButton } from '..';
 
@@ -15,15 +19,10 @@ export const ForgotPasswordForm: React.FC = () => (
   >
     {({ handleChange, handleBlur, handleSubmit, values }) => (
       <>
-        <KeyboardAwareScrollView
-          extraScrollHeight={15}
-          enableOnAndroid={true}
-          style={{ marginHorizontal: -20 }}
-          contentContainerStyle={{ paddingHorizontal: 20 }}
-        >
-          <MiddleSection>
+        <FormContainer>
+          <MiddleSectionM>
             <BoxShadow>
-              <Input
+              <TextInput
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
@@ -32,31 +31,16 @@ export const ForgotPasswordForm: React.FC = () => (
               {/* Leaving for later animation */}
               {/* <Label>Email</Label> */}
             </BoxShadow>
-          </MiddleSection>
-          <ButtonContainer>
+          </MiddleSectionM>
+          <ButtonContainerM>
             <PrimaryButton onPress={handleSubmit}>Reset</PrimaryButton>
-          </ButtonContainer>
-        </KeyboardAwareScrollView>
+          </ButtonContainerM>
+        </FormContainer>
       </>
     )}
   </Formik>
 );
-const MiddleSection = styled.View`
-  padding-vertical: ${moderateScale(72, 2)}px;
-`;
-const BoxShadow = styled.View`
-  border-radius: 10px;
-  elevation: 7;
-  background-color: ${({ theme }) => theme.colors.white};
-  justify-content: center;
-  margin-bottom: ${scale(10)}px;
-`;
-const Input = styled.TextInput`
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  height: ${scale(71)}px;
-  padding-left: ${scale(10)}px;
-`;
+
 // const Label = styled.Text`
 //   font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
 //   color: ${({ theme }) => theme.colors.primary};
@@ -65,8 +49,3 @@ const Input = styled.TextInput`
 //   padding-left: ${scale(10)}px;
 //   z-index: -10;
 // `;
-
-const ButtonContainer = styled.View`
-  height: ${scale(71)}px;
-  margin-bottom: ${verticalScale(150)}px;
-`;
