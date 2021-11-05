@@ -1,5 +1,7 @@
 import { authConstants } from './auth/AuthConstants';
+import { appConstants } from './app/AppConstants';
 
 export const constants = {
-  app: authConstants,
+  auth: authConstants,
+  app: appConstants,
 };

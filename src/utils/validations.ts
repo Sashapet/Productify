@@ -10,22 +10,6 @@ const loginSchema = yup.object().shape({
 });
 
 const registerSchema = yup.object().shape({
-  //   firstname: yup
-  //     .string()
-  //     .max(15, 'firstNameMax')
-  //     .required('firstNameReq')
-  //     .matches(letterRegex, 'firstNameAplhabets')
-  //     .transform((value, originalValue) =>
-  //       /\s/.test(originalValue) ? NaN : value,
-  //     ),
-  //   lastname: yup
-  //     .string()
-  //     .max(15, 'lastNameMax')
-  //     .required('lastNameReq')
-  //     .transform((value, originalValue) =>
-  //       /\s/.test(originalValue) ? NaN : value,
-  //     )
-  //     .matches(letterRegex, 'lastNameAplhabets'),
   email: yup.string().email('Email is not valid').required('Email is required'),
   password: yup
     .string()

@@ -8,15 +8,18 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import EyeIcon from 'react-native-vector-icons/Entypo';
 import { COLORS, FONTS } from '@assets/theme';
 import { validations } from '@utils/validations';
+import { actions } from '@state/.';
+import { useDispatch } from 'react-redux';
 
 import { PrimaryButton } from '..';
 
 export const RegisterForm: React.FC = () => {
   const [passwordEye, setPasswordEye] = useState(false);
-
   const [confirmEye, setConfirmEye] = useState(false);
 
+  const dispatch = useDispatch();
   const { navigate } = useNavigation();
+
   const navigateToLogin = useCallback(() => {
     navigate('LoginScreen');
   }, []);
@@ -30,7 +33,14 @@ export const RegisterForm: React.FC = () => {
   return (
     <Formik
       initialValues={{ email: '', password: '', confirmPassword: '' }}
-      onSubmit={values => console.tron.log(values)}
+      onSubmit={async values =>
+        dispatch(
+          actions.auth.register({
+            email: values.email,
+            password: values.password,
+          }),
+        )
+      }
       validationSchema={validations.register}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (

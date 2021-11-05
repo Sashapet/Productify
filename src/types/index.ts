@@ -1,0 +1,1 @@
+export { SignUpProps } from './authTypes';

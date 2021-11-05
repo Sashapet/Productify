@@ -1,38 +1,32 @@
 import { EventChannel, eventChannel } from 'redux-saga';
-import { call, fork, put, take } from 'redux-saga/effects';
+import { call, fork, put, take, takeLeading } from 'redux-saga/effects';
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
-// import database from '@react-native-firebase/database';
+import { SignUpProps } from '@typings/.';
+import { actions, constants, setOnSyncConstants } from '@state/.';
+import { authApi } from '@api/.';
 
-// import { constants } from '../constants';
-import { actions } from '../actions';
+function* register(data: { type: string; payload: SignUpProps }) {
+  try {
+    const { payload } = data;
 
-// const usersChannel = async (uid: string) => {
-//   const db = database().ref(`users/${uid}`);
-//   return eventChannel(emit => {
-//     db.on(
-//       'value',
-//       snapshot => {
-//         emit({ user: snapshot.val() });
-//       },
-//       errorObject => {
-//         console.log(errorObject);
-//       },
-//     );
-//     return () => db.off();
-//   });
-// };
-
-// export function* watchUser(uid: string) {
-//   const channel: EventChannel<IUserProps> = yield call(usersChannel, uid);
-//   try {
-//     while (true) {
-//       const { user } = yield take(channel);
-//       yield put(actions.auth.updateUserInfo(user));
-//     }
-//   } catch (e) {
-//     console.tron.log(e.message);
-//   }
-// }
+    yield put(
+      actions.app.setOnSync({
+        type: setOnSyncConstants.register,
+        setOnSync: true,
+      }),
+    );
+    yield call(authApi.register, payload.email, payload.password);
+  } catch (e) {
+    console.tron.log(e.message);
+  } finally {
+    yield put(
+      actions.app.setOnSync({
+        type: setOnSyncConstants.register,
+        setOnSync: false,
+      }),
+    );
+  }
+}
 
 const getAuthChannel = async () =>
   eventChannel(emit => {
@@ -50,9 +44,6 @@ export function* watchForFirebaseAuth() {
     while (true) {
       const { user } = yield take(channel);
       yield put(actions.auth.authUserStateChanged(user));
-      // if (userState) {
-      //   yield fork(watchUser, userState.uid);
-      // }
     }
   } catch (e) {
     console.tron.log(e.message);
@@ -61,4 +52,5 @@ export function* watchForFirebaseAuth() {
 
 export default function* authSaga() {
   yield fork(watchForFirebaseAuth);
+  yield takeLeading(constants.auth.REGISTER, register);
 }
