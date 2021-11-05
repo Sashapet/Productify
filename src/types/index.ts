@@ -1,1 +1,1 @@
-export { SignUpProps } from './authTypes';
+export * from './authTypes';
