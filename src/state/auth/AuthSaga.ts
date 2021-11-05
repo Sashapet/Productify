@@ -1,6 +1,4 @@
-import { EventChannel, eventChannel } from 'redux-saga';
-import { call, fork, put, take, takeLeading } from 'redux-saga/effects';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { call, put, takeLeading } from 'redux-saga/effects';
 import { SignUpProps } from '@typings/.';
 import { actions, constants, setOnSyncConstants } from '@state/.';
 import { authApi } from '@api/.';
@@ -49,30 +47,7 @@ function* logOut() {
   }
 }
 
-const getAuthChannel = async () =>
-  eventChannel(emit => {
-    const unsubscribe = auth().onAuthStateChanged(user => {
-      emit({ user });
-    });
-    return unsubscribe;
-  });
-
-export function* watchForFirebaseAuth() {
-  const channel: EventChannel<FirebaseAuthTypes.User> = yield call(
-    getAuthChannel,
-  );
-  try {
-    while (true) {
-      const { user } = yield take(channel);
-      yield put(actions.auth.authUserStateChanged(user));
-    }
-  } catch (e) {
-    console.tron.log(e.message);
-  }
-}
-
 export default function* authSaga() {
-  yield fork(watchForFirebaseAuth);
   yield takeLeading(constants.auth.REGISTER, register);
   yield takeLeading(constants.auth.LOGOUT, logOut);
 }
