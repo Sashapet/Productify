@@ -5,4 +5,7 @@ const register = async (email: string, password: string) =>
 
 const logOut = async () => auth().signOut();
 
-export const authApi = { register, logOut };
+const login = async (email: string, password: string) =>
+  auth().signInWithEmailAndPassword(email, password);
+
+export const authApi = { register, logOut, login };
