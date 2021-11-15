@@ -1,25 +1,25 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
 import { SignProps } from '@typings/.';
-import { actions, constants, setOnSyncConstants } from '@state/.';
+import { actions, constants } from '@state/.';
 import { authApi } from '@api/.';
 
 function* register(data: { type: string; payload: SignProps }) {
   try {
-    const { payload } = data;
-
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.register,
+        type: '',
         setOnSync: true,
       }),
     );
+    const { payload } = data;
+
     yield call(authApi.register, payload.email, payload.password);
   } catch (e) {
     console.tron.log(e.message);
   } finally {
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.register,
+        type: '',
         setOnSync: false,
       }),
     );
@@ -28,19 +28,19 @@ function* register(data: { type: string; payload: SignProps }) {
 
 function* logOut() {
   try {
-    yield call(authApi.logOut);
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.logOut,
+        type: '',
         setOnSync: true,
       }),
     );
+    yield call(authApi.logOut);
   } catch (e) {
     console.tron.log(e.message);
   } finally {
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.logOut,
+        type: '',
         setOnSync: false,
       }),
     );
@@ -49,21 +49,20 @@ function* logOut() {
 
 function* login(data: { type: string; payload: SignProps }) {
   try {
-    const { payload } = data;
-
-    yield call(authApi.login, payload.email, payload.password);
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.login,
+        type: '',
         setOnSync: true,
       }),
     );
+    const { payload } = data;
+    yield call(authApi.login, payload.email, payload.password);
   } catch (e) {
     console.tron.log(e.message);
   } finally {
     yield put(
       actions.app.setOnSync({
-        type: setOnSyncConstants.login,
+        type: '',
         setOnSync: false,
       }),
     );

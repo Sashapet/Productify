@@ -7,7 +7,7 @@ export const FormContainer: React.FC = ({ children }) => (
     enableOnAndroid={true}
     style={{ marginHorizontal: -20 }}
     contentContainerStyle={{ paddingHorizontal: 20 }}
-    keyboardShouldPersistTaps={'always'}
+    keyboardShouldPersistTaps={'handled'}
   >
     {children}
   </KeyboardAwareScrollView>
