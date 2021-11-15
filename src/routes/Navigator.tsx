@@ -5,6 +5,7 @@ import { lightTheme } from '@assets/theme/theme';
 import RNBootSplash from 'react-native-bootsplash';
 import { ThemeProvider } from 'styled-components/native';
 import { COLORS } from '@assets/theme';
+import { useSelector } from 'react-redux';
 import { selectors } from '@state/selectors';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { HomeView } from '@containers/HomeFlow';
@@ -14,7 +15,8 @@ import {
   LoginView,
   RegisterView,
 } from '@containers/LoginFlow';
-import { useSelector } from 'react-redux';
+
+import { ROUTES } from './RouteNames';
 
 const Navigator = () => {
   const Stack = createStackNavigator();
@@ -35,17 +37,23 @@ const Navigator = () => {
               headerMode="none"
             >
               {user ? (
-                <Stack.Screen name="HomeScreen" component={HomeView} />
+                <Stack.Screen name={ROUTES.HomeScreen} component={HomeView} />
               ) : (
                 <>
-                  <Stack.Screen name="LandingScreen" component={LandingView} />
-                  <Stack.Screen name="LoginScreen" component={LoginView} />
                   <Stack.Screen
-                    name="RegisterScreen"
+                    name={ROUTES.LandingScreen}
+                    component={LandingView}
+                  />
+                  <Stack.Screen
+                    name={ROUTES.LoginScreen}
+                    component={LoginView}
+                  />
+                  <Stack.Screen
+                    name={ROUTES.RegisterScreen}
                     component={RegisterView}
                   />
                   <Stack.Screen
-                    name="ForgotPasswordScreen"
+                    name={ROUTES.ForgotPasswordScreen}
                     component={ForgotPasswordView}
                   />
                 </>
