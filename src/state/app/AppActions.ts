@@ -5,6 +5,12 @@ const setOnSync = (payload: { type: string; setOnSync: boolean }) => ({
   payload,
 });
 
+const success = (payload: { type: string; text: string }) => ({
+  type: constants.app.SUCCESS,
+  payload,
+});
+
 export const appActions = {
   setOnSync,
+  success,
 };

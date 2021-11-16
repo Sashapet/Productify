@@ -1,6 +1,5 @@
-//SET ON SYNC CONSTANTS
-export { setOnSyncConstants } from './app/SetOnSyncConstants';
-//REDUX CONSTANTS
+export { selectors } from './selectors';
+export { messages } from './app/MessagesConstants';
+export { loading } from './app/SetOnSyncConstants';
 export { constants } from './constants';
-//REDUX ACTIONS
 export { actions } from './actions';

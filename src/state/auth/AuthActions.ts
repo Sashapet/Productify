@@ -20,10 +20,15 @@ const login = (payload: SignProps) => ({
   type: constants.auth.LOGIN,
   payload,
 });
+const recover = (payload: string) => ({
+  type: constants.auth.RECOVER,
+  payload,
+});
 
 export const authActions = {
   authUserStateChanged,
   register,
   logOut,
   login,
+  recover,
 };
