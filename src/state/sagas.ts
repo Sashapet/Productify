@@ -1,5 +1,8 @@
-import { call } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
+
+import authSaga from './auth/AuthSaga';
+import { watchForFirebaseAuth } from './auth/AuthWatcher';
 
 export function* rootSaga() {
-  yield call(console.log, 'Hello from saga');
+  yield all([fork(authSaga), fork(watchForFirebaseAuth)]);
 }

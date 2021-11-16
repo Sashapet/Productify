@@ -3,15 +3,15 @@ import { createReducer } from '@reduxjs/toolkit';
 import { constants } from '../constants';
 
 export const INITIAL_STATE: AppReducerState = {
-  needToUpdate: false,
+  setOnSync: { type: null, setOnSync: false },
 };
 
 export interface AppReducerState {
-  needToUpdate: boolean;
+  setOnSync: { type: string; setOnSync: boolean };
 }
 
 export const appReducer = createReducer(INITIAL_STATE, {
-  [constants.app.SET_APP_UPDATE_FLAG]: (state, action) => {
-    state.needToUpdate = action.needToUpdate;
+  [constants.app.SET_ON_SYNC]: (state, action) => {
+    state.setOnSync = action.payload;
   },
 });

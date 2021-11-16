@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "842746129215",
+    "firebase_url": "https://productify-c4230-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "productify-c4230",
+    "storage_bucket": "productify-c4230.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842746129215:android:614ff0baa3e6eaa67fc18a",
+        "android_client_info": {
+          "package_name": "com.productify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842746129215-e2m00o3np2u7j1tadct3f86ponkcmrlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQunuwfHtj79bHLSeWsIhiJEFindntVZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842746129215-e2m00o3np2u7j1tadct3f86ponkcmrlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

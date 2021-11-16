@@ -1,20 +1,26 @@
 import React, { useCallback, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
-import { moderateScale, scale } from '@utils/helpers/dimensions';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableWithoutFeedback } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import EyeIcon from 'react-native-vector-icons/Entypo';
-import { COLORS, FONTS } from '@assets/theme/';
+import { TouchableWithoutFeedback as TouchableText } from 'react-native';
+import { validations } from '@utils/validations';
+import { useDispatch } from 'react-redux';
+import { actions } from '@state/.';
+import {
+  BoxShadow,
+  ButtonContainerS,
+  FormContainer,
+  MiddleSectionM,
+} from '@components/wrappers/';
+import { TextInput } from '@components/inputs';
+import { EyeButton } from '@components/buttons';
+import { GreenText, GreyText } from '@components/texts';
 
 import { PrimaryButton } from '..';
 
 export const LoginForm: React.FC = () => {
-  const [passwordEye, setPasswordEye] = useState(false);
-  const submit = useCallback(() => {
-    console.tron.log('sth');
-  }, []);
+  const [passwordEyeState, setPasswordEyeState] = useState(false);
+  const dispatch = useDispatch();
   const { navigate } = useNavigation();
   const navigateToRegister = useCallback(() => {
     navigate('RegisterScreen');
@@ -22,26 +28,28 @@ export const LoginForm: React.FC = () => {
   const navigateToForgot = useCallback(() => {
     navigate('ForgotPasswordScreen');
   }, []);
-  const switchPasswordEye = useCallback(() => {
-    setPasswordEye(prevState => !prevState);
+  const switchPasswordEyeState = useCallback(() => {
+    setPasswordEyeState(prevState => !prevState);
   }, []);
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      onSubmit={values => console.tron.log(values)}
+      onSubmit={async values =>
+        dispatch(
+          actions.auth.login({
+            email: values.email,
+            password: values.password,
+          }),
+        )
+      }
+      validationSchema={validations.login}
     >
-      {({ handleChange, handleBlur, values }) => (
+      {({ handleChange, handleBlur, handleSubmit, values }) => (
         <>
-          <KeyboardAwareScrollView
-            extraScrollHeight={15}
-            enableOnAndroid={true}
-            style={{ marginHorizontal: -20 }}
-            contentContainerStyle={{ paddingHorizontal: 20 }}
-            keyboardShouldPersistTaps={'always'}
-          >
-            <MiddleSection>
+          <FormContainer>
+            <MiddleSectionM>
               <BoxShadow>
-                <Input
+                <TextInput
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
@@ -51,59 +59,42 @@ export const LoginForm: React.FC = () => {
                 {/* <Label>Email</Label> */}
               </BoxShadow>
               <BoxShadow>
-                <Input
+                <TextInput
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
                   placeholder="Password"
-                  secureTextEntry={passwordEye ? false : true}
+                  secureTextEntry={passwordEyeState ? false : true}
                 />
-                <EyeContainer onPress={switchPasswordEye}>
-                  <EyeIcon
-                    name={passwordEye ? 'eye' : 'eye-with-line'}
-                    size={scale(FONTS.size.m)}
-                    color={COLORS.primary}
-                  />
-                </EyeContainer>
+                <EyeButton
+                  eyeState={passwordEyeState}
+                  switchEyeState={switchPasswordEyeState}
+                />
+
                 {/* Leaving for later animation */}
                 {/* <Label>Password</Label> */}
               </BoxShadow>
               <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
-            </MiddleSection>
-            <ButtonContainer>
-              <PrimaryButton onPress={submit}>Login</PrimaryButton>
-            </ButtonContainer>
-            <TouchableWithoutFeedback onPress={navigateToRegister}>
-              <FlexContainer>
-                <QuestionText>Don&apos;t have an account?</QuestionText>
+            </MiddleSectionM>
+            <ButtonContainerS>
+              <PrimaryButton onPress={handleSubmit}>Login</PrimaryButton>
+            </ButtonContainerS>
+            <TouchableText onPress={navigateToRegister}>
+              <Row>
+                <GreyText>Don&apos;t have an account?</GreyText>
                 <GreenText>Register</GreenText>
-              </FlexContainer>
-            </TouchableWithoutFeedback>
-          </KeyboardAwareScrollView>
+              </Row>
+            </TouchableText>
+          </FormContainer>
         </>
       )}
     </Formik>
   );
 };
-const MiddleSection = styled.View`
-  padding-vertical: ${moderateScale(72, 2)}px;
-`;
-const BoxShadow = styled.View`
-  border-radius: 10px;
-  elevation: 7;
-  background-color: ${({ theme }) => theme.colors.white};
-  justify-content: center;
-  margin-bottom: ${scale(10)}px;
-`;
-const Input = styled.TextInput`
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  height: ${scale(71)}px;
-  padding-left: ${scale(10)}px;
-`;
-const EyeContainer = styled.TouchableOpacity`
-  position: absolute;
-  right: ${scale(10)}px;
+//Reusable
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 /* Leaving for later animation */
@@ -115,24 +106,3 @@ const EyeContainer = styled.TouchableOpacity`
 //   padding-left: ${scale(10)}px;
 //   z-index: -10;
 // `;
-const GreenText = styled.Text`
-  color: ${({ theme }) => theme.colors.primary};
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsBold};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-`;
-
-const ButtonContainer = styled.View`
-  height: ${scale(71)}px;
-  margin-bottom: ${scale(10)}px;
-`;
-
-const QuestionText = styled.Text`
-  color: ${({ theme }) => theme.colors.black02};
-  font-family: ${({ theme }) => theme.fonts.Poppins.PoppinsMedium};
-  font-size: ${({ theme }) => scale(theme.fonts.size.s)}px;
-  padding-right: 2px;
-`;
-const FlexContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
