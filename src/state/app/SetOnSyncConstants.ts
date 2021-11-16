@@ -1,1 +1,1 @@
-export const setOnSyncConstants = {};
+export const loading = {};

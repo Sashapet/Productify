@@ -8,4 +8,6 @@ const logOut = async () => auth().signOut();
 const login = async (email: string, password: string) =>
   auth().signInWithEmailAndPassword(email, password);
 
-export const authApi = { register, logOut, login };
+const recover = async (email: string) => auth().sendPasswordResetEmail(email);
+
+export const authApi = { register, logOut, login, recover };

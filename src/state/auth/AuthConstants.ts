@@ -3,4 +3,5 @@ export const authConstants = {
   REGISTER: 'app/REGISTER',
   LOGOUT: 'app/LOGOUT',
   LOGIN: 'app/LOGIN',
+  RECOVER: 'app/RECOVER',
 };
