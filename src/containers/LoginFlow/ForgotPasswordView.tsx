@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ForgotPasswordForm } from '@components/forms/';
+import { ForgotPasswordForm } from '@components/forms/.';
 import { View as UpperSection } from 'react-native';
 import { AuthContainer as ForgotPasswordContainer } from '@components/wrappers';
 import { GreyText as Description, LogoText } from '@components/texts';
@@ -16,7 +16,7 @@ export const ForgotPasswordView: React.FC = () => {
       setMessage(true);
     }
     return () => {
-      //To initial state
+      //cleanup
       dispatch(actions.app.success({ type: null, text: null }));
     };
   }, [messageType]);

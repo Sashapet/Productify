@@ -48,6 +48,7 @@ export interface AppColors {
   secondary: string;
   black: string;
   white: string;
+  red: string;
   black01: string;
   black02: string;
   black03: string;

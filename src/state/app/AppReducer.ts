@@ -5,11 +5,13 @@ import { constants } from '../constants';
 export const INITIAL_STATE: AppReducerState = {
   setOnSync: { type: null, setOnSync: false },
   messages: { type: null, text: false },
+  firebaseErr: null,
 };
 
 export interface AppReducerState {
   setOnSync: { type: string; setOnSync: boolean };
   messages: { type: string; text: boolean };
+  firebaseErr: string;
 }
 
 export const appReducer = createReducer(INITIAL_STATE, {
@@ -21,5 +23,8 @@ export const appReducer = createReducer(INITIAL_STATE, {
   },
   [constants.app.ERROR]: (state, action) => {
     state.messages = action.payload;
+  },
+  [constants.app.FIREBASE_ERROR]: (state, action) => {
+    state.firebaseErr = action.payload;
   },
 });

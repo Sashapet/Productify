@@ -3,8 +3,7 @@ import styled from 'styled-components/native';
 import { scale } from '@utils/helpers/dimensions';
 import { GreyText as Description } from '@components/texts';
 import { useNavigation } from '@react-navigation/native';
-
-import { PrimaryButton } from '..';
+import { PrimaryButton } from '@components/buttons';
 
 export const ForgotPasswordMsg: React.FC = () => {
   const { goBack } = useNavigation();
