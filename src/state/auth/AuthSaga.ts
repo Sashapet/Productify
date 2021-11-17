@@ -16,6 +16,7 @@ function* register(data: { type: string; payload: SignProps }) {
     yield call(authApi.register, payload.email, payload.password);
   } catch (e) {
     console.tron.log(e.message);
+    yield put(actions.app.firebaseErr(e.message));
   } finally {
     yield put(
       actions.app.setOnSync({
@@ -37,6 +38,7 @@ function* logOut() {
     yield call(authApi.logOut);
   } catch (e) {
     console.tron.log(e.message);
+    yield put(actions.app.firebaseErr(e.message));
   } finally {
     yield put(
       actions.app.setOnSync({
@@ -59,6 +61,7 @@ function* login(data: { type: string; payload: SignProps }) {
     yield call(authApi.login, payload.email, payload.password);
   } catch (e) {
     console.tron.log(e.message);
+    yield put(actions.app.firebaseErr(e.message));
   } finally {
     yield put(
       actions.app.setOnSync({
@@ -89,7 +92,9 @@ function* recover(data: { type: string; payload: string }) {
       }),
     );
   } catch (e) {
+    //Err
     console.tron.log(e.message);
+    yield put(actions.app.firebaseErr(e.message));
   } finally {
     yield put(
       actions.app.setOnSync({

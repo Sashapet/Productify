@@ -1,8 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
+import {
+  Keyboard,
+  TouchableWithoutFeedback as TouchableText,
+} from 'react-native';
 import { Formik } from 'formik';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableWithoutFeedback as TouchableText } from 'react-native';
 import { validations } from '@utils/validations';
 import { useDispatch } from 'react-redux';
 import { actions } from '@state/.';
@@ -13,13 +16,14 @@ import {
   MiddleSectionM,
 } from '@components/wrappers/';
 import { TextInput } from '@components/inputs';
-import { EyeButton } from '@components/buttons';
+import { EyeButton, PrimaryButton } from '@components/buttons';
 import { GreenText, GreyText } from '@components/texts';
+import { chooseErrorTitle } from '@utils/helpers/chooseErrorTitle';
+import { Error } from '@components/other';
 
-import { PrimaryButton } from '..';
-
-export const LoginForm: React.FC = () => {
+export const LoginForm: React.FC = memo(() => {
   const [passwordEyeState, setPasswordEyeState] = useState(false);
+  const [error, setError] = useState<string>();
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
   const navigateToRegister = useCallback(() => {
@@ -34,63 +38,78 @@ export const LoginForm: React.FC = () => {
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
-      onSubmit={async values =>
+      onSubmit={async values => {
+        Keyboard.dismiss();
         dispatch(
           actions.auth.login({
             email: values.email,
             password: values.password,
           }),
-        )
-      }
+        );
+      }}
       validationSchema={validations.login}
+      validateOnMount
     >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <>
-          <FormContainer>
-            <MiddleSectionM>
-              <BoxShadow>
-                <TextInput
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  value={values.email}
-                  placeholder="Email"
-                />
-                {/* Leaving for later animation */}
-                {/* <Label>Email</Label> */}
-              </BoxShadow>
-              <BoxShadow>
-                <TextInput
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
-                  placeholder="Password"
-                  secureTextEntry={passwordEyeState ? false : true}
-                />
-                <EyeButton
-                  eyeState={passwordEyeState}
-                  switchEyeState={switchPasswordEyeState}
-                />
+      {({ handleChange, handleBlur, handleSubmit, values, errors }) => {
+        const submit = () => {
+          dispatch(actions.app.firebaseErr(null));
+          setError(chooseErrorTitle(errors));
+          handleSubmit();
+        };
 
-                {/* Leaving for later animation */}
-                {/* <Label>Password</Label> */}
-              </BoxShadow>
-              <GreenText onPress={navigateToForgot}>Forgot Password?</GreenText>
-            </MiddleSectionM>
-            <ButtonContainerS>
-              <PrimaryButton onPress={handleSubmit}>Login</PrimaryButton>
-            </ButtonContainerS>
-            <TouchableText onPress={navigateToRegister}>
-              <Row>
-                <GreyText>Don&apos;t have an account?</GreyText>
-                <GreenText>Register</GreenText>
-              </Row>
-            </TouchableText>
-          </FormContainer>
-        </>
-      )}
+        return (
+          <>
+            <FormContainer>
+              <MiddleSectionM>
+                <Error>{error}</Error>
+                <BoxShadow>
+                  <TextInput
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    placeholder="Email"
+                  />
+                  {/* Leaving for later animation */}
+                  {/* <Label>Email</Label> */}
+                </BoxShadow>
+                <BoxShadow>
+                  <TextInput
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    placeholder="Password"
+                    secureTextEntry={passwordEyeState ? false : true}
+                  />
+                  <EyeButton
+                    eyeState={passwordEyeState}
+                    switchEyeState={switchPasswordEyeState}
+                  />
+
+                  {/* Leaving for later animation */}
+                  {/* <Label>Password</Label> */}
+                </BoxShadow>
+                <GreenText onPress={navigateToForgot}>
+                  Forgot Password?
+                </GreenText>
+              </MiddleSectionM>
+              <ButtonContainerS>
+                <PrimaryButton onPress={submit}>Login</PrimaryButton>
+              </ButtonContainerS>
+              <TouchableText onPress={navigateToRegister}>
+                <Row>
+                  <GreyText>Don&apos;t have an account?</GreyText>
+                  <GreenText>Register</GreenText>
+                </Row>
+              </TouchableText>
+            </FormContainer>
+          </>
+        );
+      }}
     </Formik>
   );
-};
+});
+
+LoginForm.displayName = 'LoginForm';
 //Reusable
 export const Row = styled.View`
   flex-direction: row;
